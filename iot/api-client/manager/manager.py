@@ -145,26 +145,22 @@ def create_device(
     # Check that the device doesn't already exist
     client = iot_v1.DeviceManagerClient()
 
-    exists = False
-
     parent = client.registry_path(project_id, cloud_region, registry_id)
 
     devices = list(client.list_devices(parent=parent))
 
-    for device in devices:
-        if device.id == device_id:
-            exists = True
-
-    # Create the device
-    device_template = {
-        'id': device_id,
-        'gateway_config': {
-          'gateway_type': 'NON_GATEWAY',
-          'gateway_auth_method': 'ASSOCIATION_ONLY'
-        }
-    }
+    exists = any(device.id == device_id for device in devices)
 
     if not exists:
+        # Create the device
+        device_template = {
+            'id': device_id,
+            'gateway_config': {
+              'gateway_type': 'NON_GATEWAY',
+              'gateway_auth_method': 'ASSOCIATION_ONLY'
+            }
+        }
+
         res = client.create_device(parent, device_template)
         print('Created Device {}'.format(res))
     else:
@@ -502,9 +498,7 @@ def get_iam_permissions(
 
     registry_path = client.registry_path(project_id, cloud_region, registry_id)
 
-    policy = client.get_iam_policy(registry_path)
-
-    return policy
+    return client.get_iam_policy(registry_path)
     # [END iot_get_iam_policy]
 
 
@@ -569,11 +563,7 @@ def create_gateway(
     with io.open(certificate_file) as f:
         certificate = f.read()
 
-    if algorithm == 'ES256':
-        certificate_format = 'ES256_PEM'
-    else:
-        certificate_format = 'RSA_X509_PEM'
-
+    certificate_format = 'ES256_PEM' if algorithm == 'ES256' else 'RSA_X509_PEM'
     # TODO: Auth type
     device_template = {
         'id': gateway_id,
@@ -644,9 +634,11 @@ def list_gateways(
     devices = list(client.list_devices(parent=path, field_mask=mask))
 
     for device in devices:
-        if device.gateway_config is not None:
-            if device.gateway_config.gateway_type == 1:
-                print('Gateway ID: {}\n\t{}'.format(device.id, device))
+        if (
+            device.gateway_config is not None
+            and device.gateway_config.gateway_type == 1
+        ):
+            print('Gateway ID: {}\n\t{}'.format(device.id, device))
     # [END iot_list_gateways]
 
 

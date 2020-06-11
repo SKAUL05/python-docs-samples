@@ -22,9 +22,8 @@ class Account(ndb.Model):
 
 
 def create_entity_using_keyword_arguments():
-    sandy = Account(
+    return Account(
         username='Sandy', userid=123, email='sandy@example.com')
-    return sandy
 
 
 def create_entity_using_attributes():
@@ -55,13 +54,11 @@ def demonstrate_entity_attribute_type_checking(sandy):
 
 
 def save_entity(sandy):
-    sandy_key = sandy.put()
-    return sandy_key
+    return sandy.put()
 
 
 def get_entity(sandy_key):
-    sandy = sandy_key.get()
-    return sandy
+    return sandy_key.get()
 
 
 def get_key_kind_and_id(sandy_key):
@@ -71,14 +68,12 @@ def get_key_kind_and_id(sandy_key):
 
 
 def get_url_safe_key(sandy_key):
-    url_string = sandy_key.urlsafe()
-    return url_string
+    return sandy_key.urlsafe()
 
 
 def get_entity_from_url_safe_key(url_string):
     sandy_key = ndb.Key(urlsafe=url_string)
-    sandy = sandy_key.get()
-    return sandy
+    return sandy_key.get()
 
 
 def get_key_and_numeric_id_from_url_safe_key(url_string):
@@ -145,8 +140,7 @@ def equivalent_ways_to_define_key_with_parent():
 
 
 def create_root_key():
-    sandy_key = ndb.Key(Account, 'sandy@example.com')
-    return sandy_key
+    return ndb.Key(Account, 'sandy@example.com')
 
 
 def create_entity_with_parent_keys():
@@ -168,8 +162,7 @@ def create_entity_with_parent_keys():
 
 
 def get_parent_key_of_entity(initial_revision):
-    message_key = initial_revision.key.parent()
-    return message_key
+    return initial_revision.key.parent()
 
 
 def operate_on_multiple_keys_at_once(list_of_entities):
@@ -207,8 +200,7 @@ class FlexEmployee(ndb.Expando):
 
 
 def create_expando_model_entity_with_defined_properties():
-    employee = FlexEmployee(name='Sandy', location='SF')
-    return employee
+    return FlexEmployee(name='Sandy', location='SF')
 
 
 class Specialized(ndb.Expando):
@@ -276,8 +268,7 @@ def reserve_model_ids_with_a_parent(p):
 
 
 def construct_keys_from_range_of_reserved_ids(first, last):
-    keys = [ndb.Key(MyModel, id) for id in range(first, last+1)]
-    return keys
+    return [ndb.Key(MyModel, id) for id in range(first, last+1)]
 
 
 def reserve_model_ids_up_to(N):

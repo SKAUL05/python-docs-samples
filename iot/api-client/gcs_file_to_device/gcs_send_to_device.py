@@ -77,7 +77,6 @@ def create_bucket(bucket_name):
         # If the bucket already exists, ignore the 409 HTTP error and
         # continue with the rest of the program.
         print('Bucket {} already exists.'.format(bucket_name))
-        pass
 
 
 def upload_local_file(bucket_name, gcs_file_name, source_file_name):

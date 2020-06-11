@@ -35,7 +35,7 @@ def test_vision_standard_format():
     # Generate text using Vision API
     text = pic_to_text('resources/standard_format.jpeg')
 
-    assert (text == expected_text) or (text == alt_expected_text)
+    assert text in [expected_text, alt_expected_text]
 
 
 def test_vision_non_standard_format():

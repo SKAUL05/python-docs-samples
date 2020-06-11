@@ -45,10 +45,7 @@ def hello_background(event, context):
          context (google.cloud.functions.Context): The Cloud Functions event
          metadata.
     """
-    if event and 'name' in event:
-        name = event['name']
-    else:
-        name = 'World'
+    name = event['name'] if event and 'name' in event else 'World'
     return 'Hello {}!'.format(name)
 # [END functions_helloworld_background]
 
@@ -132,9 +129,7 @@ def hello_content(request):
             name = request_json['name']
         else:
             raise ValueError("JSON is invalid, or missing a 'name' property")
-    elif content_type == 'application/octet-stream':
-        name = request.data
-    elif content_type == 'text/plain':
+    elif content_type in ['application/octet-stream', 'text/plain']:
         name = request.data
     elif content_type == 'application/x-www-form-urlencoded':
         name = request.form.get('name')

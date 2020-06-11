@@ -31,9 +31,7 @@ def send_command(sock, message):
 
     # Receive response
     print('Waiting for response.....')
-    response = sock.recv(BUFF_SIZE)
-
-    return response
+    return sock.recv(BUFF_SIZE)
 
 
 def make_message(device_id, action, data=''):

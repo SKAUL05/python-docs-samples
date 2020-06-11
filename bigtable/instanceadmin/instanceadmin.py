@@ -169,10 +169,6 @@ def add_cluster(project_id, instance_id, cluster_id):
     client = bigtable.Client(project=project_id, admin=True)
     instance = client.instance(instance_id)
 
-    location_id = 'us-central1-a'
-    serve_nodes = 3
-    storage_type = enums.StorageType.SSD
-
     if not instance.exists():
         print('Instance {} does not exists.'.format(instance_id))
     else:
@@ -181,6 +177,10 @@ def add_cluster(project_id, instance_id, cluster_id):
         print('\nListing Clusters...')
         for cluster in instance.list_clusters()[0]:
             print(cluster.cluster_id)
+        location_id = 'us-central1-a'
+        serve_nodes = 3
+        storage_type = enums.StorageType.SSD
+
         cluster = instance.cluster(cluster_id, location_id=location_id,
                                    serve_nodes=serve_nodes,
                                    default_storage_type=storage_type)

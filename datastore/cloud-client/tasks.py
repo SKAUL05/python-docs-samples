@@ -77,11 +77,7 @@ def delete_task(client, task_id):
 def format_tasks(tasks):
     lines = []
     for task in tasks:
-        if task['done']:
-            status = 'done'
-        else:
-            status = 'created {}'.format(task['created'])
-
+        status = 'done' if task['done'] else 'created {}'.format(task['created'])
         lines.append('{}: {} ({})'.format(
             task.key.id, task['description'], status))
 

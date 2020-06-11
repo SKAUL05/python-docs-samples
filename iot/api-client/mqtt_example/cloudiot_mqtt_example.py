@@ -222,7 +222,7 @@ def listen_for_messages(
     client.subscribe(error_topic, qos=0)
 
     # Wait for about a minute for config messages.
-    for i in range(1, duration):
+    for _ in range(1, duration):
         client.loop()
         if cb is not None:
             cb(client)
@@ -473,7 +473,7 @@ def mqtt_device_demo(args):
         client.publish(mqtt_topic, payload, qos=1)
 
         # Send events every second. State should not be updated as often
-        for i in range(0, 60):
+        for _ in range(60):
             time.sleep(1)
             client.loop()
     # [END iot_mqtt_run]

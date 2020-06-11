@@ -149,10 +149,11 @@ class TestKMSSnippets:
                                                self.role)
         policy = snippets.get_key_ring_policy(self.project_id,
                                               self.location, self.keyring_id)
-        found = False
-        for b in list(policy.bindings):
-            if b.role == self.role and self.member in b.members:
-                found = True
+        found = any(
+            b.role == self.role and self.member in b.members
+            for b in list(policy.bindings)
+        )
+
         assert found
         # remove member
         snippets.remove_member_from_key_ring_policy(self.project_id,
@@ -162,10 +163,11 @@ class TestKMSSnippets:
                                                     self.role)
         policy = snippets.get_key_ring_policy(self.project_id,
                                               self.location, self.keyring_id)
-        found = False
-        for b in list(policy.bindings):
-            if b.role == self.role and self.member in b.members:
-                found = True
+        found = any(
+            b.role == self.role and self.member in b.members
+            for b in list(policy.bindings)
+        )
+
         assert not found
 
     # tests get/add/remove policy members
@@ -181,10 +183,11 @@ class TestKMSSnippets:
                                                 self.location,
                                                 self.keyring_id,
                                                 self.symId)
-        found = False
-        for b in list(policy.bindings):
-            if b.role == self.role and self.member in b.members:
-                found = True
+        found = any(
+            b.role == self.role and self.member in b.members
+            for b in list(policy.bindings)
+        )
+
         assert found
         # remove member
         snippets.remove_member_from_crypto_key_policy(self.project_id,
@@ -197,10 +200,11 @@ class TestKMSSnippets:
                                                 self.location,
                                                 self.keyring_id,
                                                 self.symId)
-        found = False
-        for b in list(policy.bindings):
-            if b.role == self.role and self.member in b.members:
-                found = True
+        found = any(
+            b.role == self.role and self.member in b.members
+            for b in list(policy.bindings)
+        )
+
         assert not found
 
     def test_symmetric_encrypt_decrypt(self):

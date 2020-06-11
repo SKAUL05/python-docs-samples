@@ -44,10 +44,7 @@ def detect_text(bucket, filename):
         'source': {'image_uri': 'gs://{}/{}'.format(bucket, filename)}
     })
     annotations = text_detection_response.text_annotations
-    if len(annotations) > 0:
-        text = annotations[0].description
-    else:
-        text = ''
+    text = annotations[0].description if len(annotations) > 0 else ''
     print('Extracted text {} from image ({} chars).'.format(text, len(text)))
 
     detect_language_response = translate_client.detect_language(text)
@@ -57,7 +54,7 @@ def detect_text(bucket, filename):
     # Submit a message to the bus for each target language
     for target_lang in config.get('TO_LANG', []):
         topic_name = config['TRANSLATE_TOPIC']
-        if src_lang == target_lang or src_lang == 'und':
+        if src_lang in [target_lang, 'und']:
             topic_name = config['RESULT_TOPIC']
         message = {
             'text': text,

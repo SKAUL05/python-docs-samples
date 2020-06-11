@@ -822,7 +822,7 @@ def delete_full_collection():
         for doc in docs:
             print(u'Deleting doc {} => {}'.format(doc.id, doc.to_dict()))
             doc.reference.delete()
-            deleted = deleted + 1
+            deleted += 1
 
         if deleted >= batch_size:
             return delete_collection(coll_ref, batch_size)
@@ -899,10 +899,9 @@ def array_contains_any_queries(db):
     # [START fs_query_filter_array_contains_any]
     cities_ref = db.collection(u'cities')
 
-    query = cities_ref.where(
+    return cities_ref.where(
         u'regions', u'array_contains_any', [u'west_coast', u'east_coast']
     )
-    return query
     # [END fs_query_filter_array_contains_any]
 
 
@@ -910,8 +909,7 @@ def in_query_without_array(db):
     # [START fs_query_filter_in]
     cities_ref = db.collection(u'cities')
 
-    query = cities_ref.where(u'country', u'in', [u'USA', u'Japan'])
-    return query
+    return cities_ref.where(u'country', u'in', [u'USA', u'Japan'])
     # [END fs_query_filter_in]
 
 
@@ -919,10 +917,9 @@ def in_query_with_array(db):
     # [START fs_query_filter_in_with_array]
     cities_ref = db.collection(u'cities')
 
-    query = cities_ref.where(
+    return cities_ref.where(
         u'regions', u'in', [[u'west_coast'], [u'east_coast']]
     )
-    return query
     # [END fs_query_filter_in_with_array]
 
 

@@ -31,14 +31,14 @@ def is_bool_null(file):
     # type indicating an empty cell.
     data = list(csv.reader(file))
     # Reads each line in the csv file.
-    for line in range(len(data)):
-        for cell in range(len(data[line])):
+    for datum in data:
+        for cell in range(len(datum)):
             # Changes the string to boolean.
-            if data[line][cell] == 'true':
-                data[line][cell] = eval('True')
+            if datum[cell] == 'true':
+                datum[cell] = eval('True')
             # Changes blank string to python readable None type.
-            if data[line][cell] == '':
-                data[line][cell] = None
+            if datum[cell] == '':
+                datum[cell] = None
     return (data)
 
 

@@ -82,7 +82,7 @@ def _get_changed_files():
 
     changed_files = ci_diff_helper.get_changed_files("HEAD", config.base)
 
-    changed_files = set(["./{}".format(filename) for filename in changed_files])
+    changed_files = {"./{}".format(filename) for filename in changed_files}
 
     return changed_files
 

@@ -114,10 +114,8 @@ def get_signed_url(request):
 
     # Create a temporary upload URL
     expires_at_ms = datetime.now() + timedelta(seconds=30)
-    url = file.generate_signed_url(expires_at_ms,
+    return file.generate_signed_url(expires_at_ms,
                                    content_type=request_json['contentType'])
-
-    return url
 # [END functions_http_signed_url]
 
 

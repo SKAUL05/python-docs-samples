@@ -218,13 +218,12 @@ def inspect_table(
     # Construct the `table`. For more details on the table schema, please see
     # https://cloud.google.com/dlp/docs/reference/rest/v2/ContentItem#Table
     headers = [{"name": val} for val in data["header"]]
-    rows = []
-    for row in data["rows"]:
-        rows.append({"values": [{"string_value": cell_val} for cell_val in row]})
+    rows = [
+        {"values": [{"string_value": cell_val} for cell_val in row]}
+        for row in data["rows"]
+    ]
 
-    table = {}
-    table["headers"] = headers
-    table["rows"] = rows
+    table = {"headers": headers, "rows": rows}
     item = {"table": table}
     # Convert the project id into a full resource id.
     parent = dlp.project_path(project)

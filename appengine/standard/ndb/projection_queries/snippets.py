@@ -57,5 +57,4 @@ class Foo(ndb.Model):
 
 
 def declare_multiple_valued_property():
-    entity = Foo(A=[1, 1, 2, 3], B=['x', 'y', 'x'])
-    return entity
+    return Foo(A=[1, 1, 2, 3], B=['x', 'y', 'x'])

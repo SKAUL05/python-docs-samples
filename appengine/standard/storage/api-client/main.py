@@ -45,13 +45,11 @@ class MainPage(webapp2.RequestHandler):
             bucket=bucket, body=body,
             media_body=googleapiclient.http.MediaIoBaseUpload(
                 file_object, 'application/octet-stream'))
-        resp = req.execute()
-        return resp
+        return req.execute()
 
     def delete_object(self, bucket, filename):
         req = storage.objects().delete(bucket=bucket, object=filename)
-        resp = req.execute()
-        return resp
+        return req.execute()
 
     def get(self):
         string_io_file = StringIO.StringIO('Hello World!')

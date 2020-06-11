@@ -146,8 +146,7 @@ def __list_running_instances(project_id, zone, instances):
         return []
 
     items = res['items']
-    running_names = [i['name'] for i in items if i['status'] == 'RUNNING']
-    return running_names
+    return [i['name'] for i in items if i['status'] == 'RUNNING']
 
 
 def __stop_instances(project_id, zone, instance_names, instances):

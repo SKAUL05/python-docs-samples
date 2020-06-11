@@ -25,8 +25,7 @@ import main
 def client(monkeypatch):
     monkeypatch.chdir(os.path.dirname(main.__file__))
     main.app.testing = True
-    client = main.app.test_client()
-    return client
+    return main.app.test_client()
 
 
 def test_echo(client):

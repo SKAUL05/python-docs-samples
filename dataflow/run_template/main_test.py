@@ -42,10 +42,10 @@ def app():
 
 
 def test_run_template_python_empty_args(app):
-    project = PROJECT
     job = datetime.now().strftime('test_run_template_python-%Y%m%d-%H%M%S')
-    template = 'gs://dataflow-templates/latest/Word_Count'
     with pytest.raises(HttpError):
+        project = PROJECT
+        template = 'gs://dataflow-templates/latest/Word_Count'
         main.run(project, job, template)
 
 

@@ -69,8 +69,8 @@ def test_blob():
 
 
 def test_download_blob(test_blob):
-    test_blob_name, test_blob_content = test_blob
     with tempfile.NamedTemporaryFile() as dest_file:
+        test_blob_name, test_blob_content = test_blob
         storage_download_encrypted_file.download_encrypted_blob(
             BUCKET, test_blob_name, dest_file.name, TEST_ENCRYPTION_KEY
         )

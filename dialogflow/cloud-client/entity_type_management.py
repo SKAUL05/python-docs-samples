@@ -83,11 +83,9 @@ def _get_entity_type_ids(project_id, display_name):
         entity_type.name for entity_type in entity_types
         if entity_type.display_name == display_name]
 
-    entity_type_ids = [
+    return [
         entity_type_name.split('/')[-1] for entity_type_name
         in entity_type_names]
-
-    return entity_type_ids
 
 
 if __name__ == '__main__':

@@ -43,9 +43,7 @@ def analyze_entities(text, encoding='UTF32'):
     service = googleapiclient.discovery.build('language', 'v1')
 
     request = service.documents().analyzeEntities(body=body)
-    response = request.execute()
-
-    return response
+    return request.execute()
 
 
 def analyze_sentiment(text, encoding='UTF32'):
@@ -60,9 +58,7 @@ def analyze_sentiment(text, encoding='UTF32'):
     service = googleapiclient.discovery.build('language', 'v1')
 
     request = service.documents().analyzeSentiment(body=body)
-    response = request.execute()
-
-    return response
+    return request.execute()
 
 
 def analyze_syntax(text, encoding='UTF32'):
@@ -77,9 +73,7 @@ def analyze_syntax(text, encoding='UTF32'):
     service = googleapiclient.discovery.build('language', 'v1')
 
     request = service.documents().analyzeSyntax(body=body)
-    response = request.execute()
-
-    return response
+    return request.execute()
 
 
 if __name__ == '__main__':

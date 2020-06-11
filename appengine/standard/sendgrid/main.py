@@ -36,9 +36,7 @@ def send_simple_message(recipient):
         html_content='<strong>Example</strong> message.')
 
     sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-    response = sg.send(message)
-
-    return response
+    return sg.send(message)
     # [END sendgrid-send]
 
 

@@ -189,12 +189,9 @@ def test_receive_command(capsys):
             service_account_json, project_id, cloud_region, pubsub_topic,
             registry_id)
 
-    exists = False
     devices = manager.list_devices(
             service_account_json, project_id, cloud_region, registry_id)
-    for device in devices:
-        if device.get('id') == device_id:
-            exists = True
+    exists = any(device.get('id') == device_id for device in devices)
 
     if not exists:
         manager.create_rs256_device(
@@ -209,7 +206,7 @@ def test_receive_command(capsys):
     client.loop_start()
 
     # Pre-process commands
-    for i in range(1, 5):
+    for _ in range(1, 5):
         client.loop()
         time.sleep(1)
 
@@ -218,7 +215,7 @@ def test_receive_command(capsys):
             device_id, 'me want cookies')
 
     # Process commands
-    for i in range(1, 5):
+    for _ in range(1, 5):
         client.loop()
         time.sleep(1)
 

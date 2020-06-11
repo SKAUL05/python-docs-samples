@@ -116,7 +116,7 @@ def process_message(message):
     # Turns the power of the light sensor on/off
     if 'power' in message:
         state = message['power'].lower()
-        if state == 'on' or state == 'off':
+        if state in ['on', 'off']:
             LightSensor.power = state
         else:
             print('Invalid value for key "power". Specify "on" or "off."')
@@ -164,7 +164,7 @@ def main():
 
                 # If there is no data from the socket, just report the lux
                 # readings
-                if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
+                if err in [errno.EAGAIN, errno.EWOULDBLOCK]:
                     # If the light sensor is off, wait a bit before checking
                     # again.
                     if LightSensor.power.lower() == 'off':

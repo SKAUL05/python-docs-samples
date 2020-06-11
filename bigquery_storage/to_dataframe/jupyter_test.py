@@ -27,8 +27,7 @@ import pytest
 def ipython():
     config = tools.default_config()
     config.TerminalInteractiveShell.simple_prompt = True
-    shell = interactiveshell.TerminalInteractiveShell.instance(config=config)
-    return shell
+    return interactiveshell.TerminalInteractiveShell.instance(config=config)
 
 
 @pytest.fixture()

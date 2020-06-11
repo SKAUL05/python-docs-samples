@@ -369,12 +369,9 @@ def test_send_command(test_topic, capsys):
             service_account_json, project_id, cloud_region, pubsub_topic,
             registry_id)
 
-    exists = False
     devices = manager.list_devices(
             service_account_json, project_id, cloud_region, registry_id)
-    for device in devices:
-        if device.id == device_id:
-            exists = True
+    exists = any(device.id == device_id for device in devices)
 
     if not exists:
         manager.create_rs256_device(
@@ -390,7 +387,7 @@ def test_send_command(test_topic, capsys):
     out, _ = capsys.readouterr()
 
     # Pre-process commands
-    for i in range(1, 5):
+    for _ in range(1, 5):
         time.sleep(1)
 
     manager.send_command(
@@ -399,7 +396,7 @@ def test_send_command(test_topic, capsys):
     out, _ = capsys.readouterr()
 
     # Process commands
-    for i in range(1, 5):
+    for _ in range(1, 5):
         time.sleep(1)
 
     # Clean up

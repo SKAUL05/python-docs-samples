@@ -71,8 +71,7 @@ def fake_token(signer):
 
 
 def _verify_mocked_oauth2_token(token, request, audience):
-    claims = jwt.decode(token, certs=PUBLIC_CERT_BYTES, verify=True)
-    return claims
+    return jwt.decode(token, certs=PUBLIC_CERT_BYTES, verify=True)
 
 
 def test_index(client):

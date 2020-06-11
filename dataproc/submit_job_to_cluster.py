@@ -176,9 +176,8 @@ def submit_pyspark_job(dataproc, project, region, cluster_name, bucket_name,
 def delete_cluster(dataproc, project, region, cluster):
     """Delete the cluster."""
     print('Tearing down cluster.')
-    result = dataproc.delete_cluster(
+    return dataproc.delete_cluster(
         project_id=project, region=region, cluster_name=cluster)
-    return result
 # [END dataproc_delete]
 
 

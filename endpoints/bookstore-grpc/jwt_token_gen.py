@@ -52,8 +52,7 @@ def generate_jwt(service_account_file, issuer, audiences):
         'email': 'user@example.com'
     }
 
-    signed_jwt = google.auth.jwt.encode(signer, payload)
-    return signed_jwt
+    return google.auth.jwt.encode(signer, payload)
 
 
 if __name__ == '__main__':

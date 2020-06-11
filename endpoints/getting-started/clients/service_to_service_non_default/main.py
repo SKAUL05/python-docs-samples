@@ -65,9 +65,7 @@ def generate_jwt():
     res = slist.execute()
     signature = base64.urlsafe_b64encode(
         base64.decodestring(res['signature']))
-    signed_jwt = '{}.{}'.format(header_and_payload, signature)
-
-    return signed_jwt
+    return '{}.{}'.format(header_and_payload, signature)
 
 
 def make_request(signed_jwt):

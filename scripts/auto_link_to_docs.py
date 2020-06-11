@@ -94,9 +94,8 @@ def get_readme_path(file_path):
     """Gets the readme for an associated sample file, basically just the
     README.md in the same directory."""
     dir = os.path.dirname(file_path)
-    readme = os.path.join(
+    return os.path.join(
         REPO_ROOT, dir, 'README.md')
-    return readme
 
 
 def generate_doc_link_statement(docs):

@@ -58,7 +58,7 @@ def generate_signed_url(service_account_file, bucket_name, object_name,
     credential = '{}/{}'.format(client_email, credential_scope)
 
     if headers is None:
-        headers = dict()
+        headers = {}
     host = '{}.storage.googleapis.com'.format(bucket_name)
     headers['host'] = host
 
@@ -114,10 +114,8 @@ def generate_signed_url(service_account_file, bucket_name, object_name,
     ).decode()
 
     scheme_and_host = '{}://{}'.format('https', host)
-    signed_url = '{}{}?{}&x-goog-signature={}'.format(
+    return '{}{}?{}&x-goog-signature={}'.format(
         scheme_and_host, canonical_uri, canonical_query_string, signature)
-
-    return signed_url
 # [END storage_signed_url_all]
 
 

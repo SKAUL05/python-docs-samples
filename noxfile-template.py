@@ -23,7 +23,7 @@ import nox
 
 # Get root of this repository. Assume we don't have directories nested deeper than 10 items.
 p = Path(os.getcwd())
-for i in range(10):
+for _ in range(10):
     if p is None:
         raise Exception("Unable to detect repository root.")
     if Path(p / ".git").exists():

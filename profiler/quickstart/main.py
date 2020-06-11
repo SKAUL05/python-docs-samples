@@ -57,8 +57,7 @@ def loop7():
 
 
 def loop():
-    for _ in range(10000):
-        pass
+    pass
 
 
 if __name__ == '__main__':

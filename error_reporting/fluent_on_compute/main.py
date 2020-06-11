@@ -23,9 +23,7 @@ def simulate_error():
     fluent.sender.setup('myapp', host='localhost', port=24224)
 
     def report(ex):
-        data = {}
-        data['message'] = '{0}'.format(ex)
-        data['serviceContext'] = {'service': 'myapp'}
+        data = {'message': '{0}'.format(ex), 'serviceContext': {'service': 'myapp'}}
         # ... add more metadata
         fluent.event.Event('errors', data)
 

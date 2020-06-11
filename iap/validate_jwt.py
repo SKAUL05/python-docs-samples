@@ -102,8 +102,8 @@ def get_iap_key(key_id):
         key_cache = resp.json()
         get_iap_key.key_cache = key_cache
         key = key_cache.get(key_id)
-        if not key:
-            raise Exception('Key {!r} not found'.format(key_id))
+    if not key:
+        raise Exception('Key {!r} not found'.format(key_id))
     return key
 
 

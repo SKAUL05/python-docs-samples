@@ -160,8 +160,7 @@ def read_timeseries(client, project_resource, custom_metric_type):
         pageSize=3,
         interval_startTime=get_start_time(),
         interval_endTime=get_now_rfc3339())
-    response = request.execute()
-    return response
+    return request.execute()
 
 
 def main(project_id):

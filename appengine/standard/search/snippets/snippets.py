@@ -31,7 +31,7 @@ def search_terms(index):
 
 
 def create_document():
-    document = search.Document(
+    return search.Document(
         # Setting the doc_id is optional. If omitted, the search service will
         # create an identifier.
         doc_id='PA6-5000',
@@ -46,7 +46,6 @@ def create_document():
             search.GeoField(
                 name='home_location', value=search.GeoPoint(37.619, -122.37))
         ])
-    return document
 
 
 def add_document_to_index(document):
@@ -57,8 +56,7 @@ def add_document_to_index(document):
 def add_document_and_get_doc_id(documents):
     index = search.Index('products')
     results = index.put(documents)
-    document_ids = [document.id for document in results]
-    return document_ids
+    return [document.id for document in results]
 
 
 def get_document_by_id():
@@ -104,8 +102,7 @@ def delete_all_in_index(index):
 
 def async_query(index):
     futures = [index.search_async('foo'), index.search_async('bar')]
-    results = [future.get_result() for future in futures]
-    return results
+    return [future.get_result() for future in futures]
 
 
 def query_options():

@@ -25,8 +25,6 @@ def run_quickstart():
     project_id = 'YOUR_PROJECT_ID'
     # [END kms_quickstart]
     project_id = os.environ['GCLOUD_PROJECT']
-    # [START kms_quickstart]
-
     # Lists keys in the "global" location.
     location = 'global'
 
@@ -40,7 +38,7 @@ def run_quickstart():
     response = client.list_key_rings(parent)
     response_list = list(response)
 
-    if len(response_list) > 0:
+    if response_list:
         print('Key rings:')
         for key_ring in response_list:
             print(key_ring.name)

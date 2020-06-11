@@ -60,8 +60,7 @@ def wrap_rsa_key(public_key, private_key_bytes):
             mgf=padding.MGF1(algorithm=hashes.SHA1()),
             algorithm=hashes.SHA1(),
             label=None))
-    encoded_wrapped_key = base64.b64encode(wrapped_key)
-    return encoded_wrapped_key
+    return base64.b64encode(wrapped_key)
 
 
 def main(key_file):

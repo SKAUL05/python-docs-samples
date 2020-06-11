@@ -46,8 +46,7 @@ class CpuBurner(object):
         return os.times()[0]
 
     def busy_wait(self):
-        for _ in range(100000):
-            pass
+        pass
 
     def burn_cpu(self):
         """Consume REQUEST_CPUTIME_SEC core seconds.

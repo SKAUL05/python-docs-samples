@@ -28,12 +28,10 @@ def initialize_tracer(project_id):
     exporter = stackdriver_exporter.StackdriverExporter(
         project_id=project_id
     )
-    tracer = opencensus.trace.tracer.Tracer(
+    return opencensus.trace.tracer.Tracer(
         exporter=exporter,
         sampler=opencensus.trace.tracer.samplers.AlwaysOnSampler()
     )
-
-    return tracer
 # [END trace_setup_python_configure]
 
 
@@ -53,10 +51,8 @@ def index():
 
     # Add up to 1 sec delay, weighted toward zero
     time.sleep(random.random() ** 2)
-    result = "Tracing requests"
-
     tracer.end_span()
-    return result
+    return "Tracing requests"
 # [END trace_setup_python_quickstart]
 
 

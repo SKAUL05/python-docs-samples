@@ -69,11 +69,7 @@ def predict(
                 for column in result.tables.tables_model_column_info
             ]
             feat_list.sort(reverse=True)
-            if len(feat_list) < 10:
-                feat_to_show = len(feat_list)
-            else:
-                feat_to_show = 10
-
+            feat_to_show = min(len(feat_list), 10)
             print("Features of top importance:")
             for feat in feat_list[:feat_to_show]:
                 print(feat)

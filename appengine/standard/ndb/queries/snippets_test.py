@@ -318,7 +318,7 @@ def test_print_query_keys(testbed, capsys):
 
 
 def test_reverse_queries(testbed):
-    for i in range(11):
+    for _ in range(11):
         Bar().put()
 
     (bars, cursor, more), (r_bars, r_cursor, r_more) = (

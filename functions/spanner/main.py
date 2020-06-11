@@ -25,10 +25,10 @@ def spanner_read_data(request):
     instance = client.instance(instance_id)
     database = instance.database(database_id)
 
-    query = 'SELECT * FROM Albums'
-
     outputs = []
     with database.snapshot() as snapshot:
+        query = 'SELECT * FROM Albums'
+
         results = snapshot.execute_sql(query)
 
         for row in results:

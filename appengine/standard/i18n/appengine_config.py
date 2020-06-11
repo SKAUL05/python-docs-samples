@@ -31,5 +31,4 @@ def webapp_add_wsgi_middleware(app):
         The wrapped WSGI application.
     """
 
-    app = I18nMiddleware(app)
-    return app
+    return I18nMiddleware(app)

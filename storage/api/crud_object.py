@@ -107,7 +107,7 @@ def get_object(bucket, filename, out_file):
     downloader = googleapiclient.http.MediaIoBaseDownload(out_file, req)
 
     done = False
-    while done is False:
+    while not done:
         status, done = downloader.next_chunk()
         print("Download {}%.".format(int(status.progress() * 100)))
 
@@ -118,9 +118,7 @@ def delete_object(bucket, filename):
     service = create_service()
 
     req = service.objects().delete(bucket=bucket, object=filename)
-    resp = req.execute()
-
-    return resp
+    return req.execute()
 
 
 if __name__ == '__main__':

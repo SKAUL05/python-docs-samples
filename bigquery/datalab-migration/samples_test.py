@@ -33,8 +33,7 @@ context.set_project_id(PROJECT_ID)
 def ipython_interactive():
     config = tools.default_config()
     config.TerminalInteractiveShell.simple_prompt = True
-    shell = interactiveshell.TerminalInteractiveShell.instance(config=config)
-    return shell
+    return interactiveshell.TerminalInteractiveShell.instance(config=config)
 
 
 @pytest.fixture

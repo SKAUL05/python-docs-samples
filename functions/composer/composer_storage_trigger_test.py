@@ -20,15 +20,15 @@ import composer_storage_trigger
 @mock.patch('composer_storage_trigger.make_iap_request',
             side_effect=Exception('Bad request: JSON body error'))
 def test_json_body_error(make_iap_request_mock):
-    # Pass None, an input that is not valid JSON
-    trigger_event = None
     with pytest.raises(Exception):
+        # Pass None, an input that is not valid JSON
+        trigger_event = None
         composer_storage_trigger.trigger_dag(trigger_event)
 
 # handles error in IAP response
 @mock.patch('composer_storage_trigger.make_iap_request',
             side_effect=Exception('Error in IAP response: unauthorized'))
 def test_iap_response_error(make_iap_request_mock):
-    trigger_event = {'file': 'some-gcs-file'}
     with pytest.raises(Exception):
+        trigger_event = {'file': 'some-gcs-file'}
         composer_storage_trigger.trigger_dag(trigger_event)

@@ -76,7 +76,7 @@ class GoogleCloudStorageHook(GoogleCloudBaseHook):
                 'Either source/destination bucket or source/destination object '
                 'must be different, not both the same: bucket=%s, object=%s' %
                 (source_bucket, source_object))
-        if not source_bucket or not source_object:
+        if not (source_bucket and source_object):
             raise ValueError('source_bucket and source_object cannot be empty.')
 
         service = self.get_conn()
@@ -118,7 +118,7 @@ class GoogleCloudStorageHook(GoogleCloudBaseHook):
                 'Either source/destination bucket or source/destination object '
                 'must be different, not both the same: bucket=%s, object=%s' %
                 (source_bucket, source_object))
-        if not source_bucket or not source_object:
+        if not (source_bucket and source_object):
             raise ValueError('source_bucket and source_object cannot be empty.')
 
         service = self.get_conn()
@@ -305,7 +305,7 @@ class GoogleCloudStorageHook(GoogleCloudBaseHook):
         """
         service = self.get_conn()
 
-        ids = list()
+        ids = []
         pageToken = None
         while True:
             response = service.objects().list(

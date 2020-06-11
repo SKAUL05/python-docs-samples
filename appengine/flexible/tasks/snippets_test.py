@@ -108,10 +108,7 @@ def test_delete_queue():
 @pytest.mark.order10
 def test_retry_task():
     QUEUE_SIZE = 3
-    QUEUE_NAME = []
-    for i in range(QUEUE_SIZE):
-        QUEUE_NAME.append("queue-{}".format(uuid.uuid4()))
-
+    QUEUE_NAME = ["queue-{}".format(uuid.uuid4()) for _ in range(QUEUE_SIZE)]
     name = "projects/{}/locations/{}/queues/{}".format(
         TEST_PROJECT_ID, TEST_LOCATION, QUEUE_NAME[2])
     result = snippets.retry_task(

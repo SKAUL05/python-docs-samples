@@ -51,7 +51,7 @@ def index():
             return f'Bad Request: {msg}', 400
 
         # Validate the message is a Cloud Storage event.
-        if not data["name"] or not data["bucket"]:
+        if not (data["name"] and data["bucket"]):
             msg = ('Invalid Cloud Storage notification: '
                    'expected name and bucket properties')
             print(f'error: {msg}')

@@ -112,11 +112,9 @@ def _get_intent_ids(project_id, display_name):
         intent.name for intent in intents
         if intent.display_name == display_name]
 
-    intent_ids = [
+    return [
         intent_name.split('/')[-1] for intent_name
         in intent_names]
-
-    return intent_ids
 
 
 if __name__ == '__main__':

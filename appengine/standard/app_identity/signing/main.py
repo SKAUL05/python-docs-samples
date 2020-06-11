@@ -57,11 +57,10 @@ def verify_signed_by_app(data, signature):
     for the application."""
     public_certificates = app_identity.get_public_certificates()
 
-    for cert in public_certificates:
-        if verify_signature(data, signature, cert.x509_certificate_pem):
-            return True
-
-    return False
+    return any(
+        verify_signature(data, signature, cert.x509_certificate_pem)
+        for cert in public_certificates
+    )
 
 
 class MainPage(webapp2.RequestHandler):

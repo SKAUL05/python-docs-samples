@@ -22,7 +22,7 @@ class ShelfInfo(object):
     def __init__(self, shelf):
         self._shelf = shelf
         self._last_book_id = 0
-        self._books = dict()
+        self._books = {}
 
 
 class Bookstore(object):
@@ -30,7 +30,7 @@ class Bookstore(object):
 
     def __init__(self):
         self._last_shelf_id = 0
-        self._shelves = dict()
+        self._shelves = {}
         self._lock = threading.Lock()
 
     def list_shelf(self):

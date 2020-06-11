@@ -67,8 +67,7 @@ def get_asymmetric_public_key(key_name):
     response = client.get_public_key(key_name)
 
     key_txt = response.pem.encode('ascii')
-    key = serialization.load_pem_public_key(key_txt, default_backend())
-    return key
+    return serialization.load_pem_public_key(key_txt, default_backend())
 # [END kms_get_asymmetric_public]
 
 

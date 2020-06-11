@@ -1141,10 +1141,10 @@ def insert_datatypes_data(instance_id, database_id):
     exampleBytes1 = base64.b64encode(u'Hello World 1'.encode())
     exampleBytes2 = base64.b64encode(u'Hello World 2'.encode())
     exampleBytes3 = base64.b64encode(u'Hello World 3'.encode())
-    available_dates1 = ['2020-12-01', '2020-12-02', '2020-12-03']
-    available_dates2 = ['2020-11-01', '2020-11-05', '2020-11-15']
-    available_dates3 = ['2020-10-01', '2020-10-07']
     with database.batch() as batch:
+        available_dates1 = ['2020-12-01', '2020-12-02', '2020-12-03']
+        available_dates2 = ['2020-11-01', '2020-11-05', '2020-11-15']
+        available_dates3 = ['2020-10-01', '2020-10-07']
         batch.insert(
             table='Venues',
             columns=(
@@ -1202,15 +1202,15 @@ def query_data_with_bool(instance_id, database_id):
     instance = spanner_client.instance(instance_id)
     database = instance.database(database_id)
 
-    exampleBool = True
-    param = {
-        'outdoor_venue': exampleBool
-    }
-    param_type = {
-        'outdoor_venue': param_types.BOOL
-    }
-
     with database.snapshot() as snapshot:
+        exampleBool = True
+        param = {
+            'outdoor_venue': exampleBool
+        }
+        param_type = {
+            'outdoor_venue': param_types.BOOL
+        }
+
         results = snapshot.execute_sql(
             'SELECT VenueId, VenueName, OutdoorVenue FROM Venues '
             'WHERE OutdoorVenue = @outdoor_venue',
@@ -1234,11 +1234,11 @@ def query_data_with_bytes(instance_id, database_id):
     param = {
         'venue_info': exampleBytes
     }
-    param_type = {
-        'venue_info': param_types.BYTES
-    }
-
     with database.snapshot() as snapshot:
+        param_type = {
+            'venue_info': param_types.BYTES
+        }
+
         results = snapshot.execute_sql(
             'SELECT VenueId, VenueName FROM Venues '
             'WHERE VenueInfo = @venue_info',
@@ -1258,15 +1258,15 @@ def query_data_with_date(instance_id, database_id):
     instance = spanner_client.instance(instance_id)
     database = instance.database(database_id)
 
-    exampleDate = '2019-01-01'
-    param = {
-        'last_contact_date': exampleDate
-    }
-    param_type = {
-        'last_contact_date': param_types.DATE
-    }
-
     with database.snapshot() as snapshot:
+        exampleDate = '2019-01-01'
+        param = {
+            'last_contact_date': exampleDate
+        }
+        param_type = {
+            'last_contact_date': param_types.DATE
+        }
+
         results = snapshot.execute_sql(
             'SELECT VenueId, VenueName, LastContactDate FROM Venues '
             'WHERE LastContactDate < @last_contact_date',
@@ -1287,15 +1287,15 @@ def query_data_with_float(instance_id, database_id):
     instance = spanner_client.instance(instance_id)
     database = instance.database(database_id)
 
-    exampleFloat = 0.8
-    param = {
-        'popularity_score': exampleFloat
-    }
-    param_type = {
-        'popularity_score': param_types.FLOAT64
-    }
-
     with database.snapshot() as snapshot:
+        exampleFloat = 0.8
+        param = {
+            'popularity_score': exampleFloat
+        }
+        param_type = {
+            'popularity_score': param_types.FLOAT64
+        }
+
         results = snapshot.execute_sql(
             'SELECT VenueId, VenueName, PopularityScore FROM Venues '
             'WHERE PopularityScore > @popularity_score',
@@ -1316,15 +1316,15 @@ def query_data_with_int(instance_id, database_id):
     instance = spanner_client.instance(instance_id)
     database = instance.database(database_id)
 
-    exampleInt = 3000
-    param = {
-        'capacity': exampleInt
-    }
-    param_type = {
-        'capacity': param_types.INT64
-    }
-
     with database.snapshot() as snapshot:
+        exampleInt = 3000
+        param = {
+            'capacity': exampleInt
+        }
+        param_type = {
+            'capacity': param_types.INT64
+        }
+
         results = snapshot.execute_sql(
             'SELECT VenueId, VenueName, Capacity FROM Venues '
             'WHERE Capacity >= @capacity',
@@ -1344,15 +1344,15 @@ def query_data_with_string(instance_id, database_id):
     instance = spanner_client.instance(instance_id)
     database = instance.database(database_id)
 
-    exampleString = "Venue 42"
-    param = {
-        'venue_name': exampleString
-    }
-    param_type = {
-        'venue_name': param_types.STRING
-    }
-
     with database.snapshot() as snapshot:
+        exampleString = "Venue 42"
+        param = {
+            'venue_name': exampleString
+        }
+        param_type = {
+            'venue_name': param_types.STRING
+        }
+
         results = snapshot.execute_sql(
             'SELECT VenueId, VenueName FROM Venues '
             'WHERE VenueName = @venue_name',
@@ -1376,11 +1376,11 @@ def query_data_with_timestamp_parameter(instance_id, database_id):
     param = {
         'last_update_time': example_timestamp
     }
-    param_type = {
-        'last_update_time': param_types.TIMESTAMP
-    }
-
     with database.snapshot() as snapshot:
+        param_type = {
+            'last_update_time': param_types.TIMESTAMP
+        }
+
         results = snapshot.execute_sql(
             'SELECT VenueId, VenueName, LastUpdateTime FROM Venues '
             'WHERE LastUpdateTime < @last_update_time',

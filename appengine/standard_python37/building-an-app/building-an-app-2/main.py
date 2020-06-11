@@ -39,9 +39,7 @@ def fetch_times(limit):
     query = datastore_client.query(kind='visit')
     query.order = ['-timestamp']
 
-    times = query.fetch(limit=limit)
-
-    return times
+    return query.fetch(limit=limit)
 # [END gae_python37_datastore_store_and_fetch_times]
 
 

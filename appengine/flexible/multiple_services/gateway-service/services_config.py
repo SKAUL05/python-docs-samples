@@ -35,10 +35,10 @@ def map_services(environment):
     or when deployed."""
     url_map = {}
     for service, local_port in SERVICES.items():
-        if environment == 'production':
-            url_map[service] = production_url(service)
         if environment == 'development':
             url_map[service] = local_url(local_port)
+        elif environment == 'production':
+            url_map[service] = production_url(service)
     return url_map
 
 

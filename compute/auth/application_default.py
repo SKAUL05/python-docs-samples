@@ -38,8 +38,7 @@ def create_service():
 
 
 def list_buckets(service, project_id):
-    buckets = service.buckets().list(project=project_id).execute()
-    return buckets
+    return service.buckets().list(project=project_id).execute()
 
 
 def main(project_id):

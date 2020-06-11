@@ -41,9 +41,7 @@ def fetch_times(limit):
     query = datastore_client.query(kind='visit')
     query.order = ['-timestamp']
 
-    times = query.fetch(limit=limit)
-
-    return times
+    return query.fetch(limit=limit)
 
 
 # [START gae_python37_auth_verify_token]

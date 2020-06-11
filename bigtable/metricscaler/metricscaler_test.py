@@ -50,7 +50,6 @@ def instance():
 
     client = bigtable.Client(project=PROJECT, admin=True)
 
-    serve_nodes = 3
     storage_type = enums.StorageType.SSD
     production = enums.Instance.Type.PRODUCTION
     labels = {'prod-label': 'prod-label'}
@@ -58,6 +57,7 @@ def instance():
                                labels=labels)
 
     if not instance.exists():
+        serve_nodes = 3
         cluster = instance.cluster(cluster_id, location_id=BIGTABLE_ZONE,
                                    serve_nodes=serve_nodes,
                                    default_storage_type=storage_type)

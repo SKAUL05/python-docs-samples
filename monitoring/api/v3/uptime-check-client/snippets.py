@@ -205,7 +205,7 @@ if __name__ == '__main__':
         delete_uptime_check_config(args.name)
 
     elif args.command == 'update-uptime-check-config':
-        if not args.display_name and not args.uptime_check_path:
+        if not (args.display_name or args.uptime_check_path):
             print('Nothing to update.  Pass --display_name or '
                   '--uptime_check_path.')
         else:

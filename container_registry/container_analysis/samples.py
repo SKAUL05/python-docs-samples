@@ -42,8 +42,7 @@ def create_note(note_id, project_id):
             ]
         }
     }
-    response = grafeas_client.create_note(project_name, note_id, note)
-    return response
+    return grafeas_client.create_note(project_name, note_id, note)
 # [END containeranalysis_create_note]
 
 
@@ -129,8 +128,7 @@ def get_note(note_id, project_id):
     client = containeranalysis_v1.ContainerAnalysisClient()
     grafeas_client = client.get_grafeas_client()
     note_name = grafeas_client.note_path(project_id, note_id)
-    response = grafeas_client.get_note(note_name)
-    return response
+    return grafeas_client.get_note(note_name)
 # [END containeranalysis_get_note]
 
 
@@ -185,7 +183,7 @@ def get_occurrences_for_note(note_id, project_id):
 
     response = grafeas_client.list_note_occurrences(note_name)
     count = 0
-    for o in response:
+    for _ in response:
         # do something with the retrieved occurrence
         # in this sample, we will simply count each one
         count += 1
@@ -210,7 +208,7 @@ def get_occurrences_for_image(resource_url, project_id):
     response = grafeas_client.list_occurrences(project_name,
                                                filter_=filter_str)
     count = 0
-    for o in response:
+    for _ in response:
         # do something with the retrieved occurrence
         # in this sample, we will simply count each one
         count += 1
@@ -318,9 +316,11 @@ def poll_discovery_finished(resource_url, timeout_seconds, project_id):
             raise RuntimeError('timeout while retrieving discovery occurrence')
 
     status = DiscoveryOccurrence.AnalysisStatus.PENDING
-    while status != DiscoveryOccurrence.AnalysisStatus.FINISHED_UNSUPPORTED \
-            and status != DiscoveryOccurrence.AnalysisStatus.FINISHED_FAILED \
-            and status != DiscoveryOccurrence.AnalysisStatus.FINISHED_SUCCESS:
+    while status not in [
+        DiscoveryOccurrence.AnalysisStatus.FINISHED_UNSUPPORTED,
+        DiscoveryOccurrence.AnalysisStatus.FINISHED_FAILED,
+        DiscoveryOccurrence.AnalysisStatus.FINISHED_SUCCESS,
+    ]:
         time.sleep(1)
         updated = grafeas_client.get_occurrence(discovery_occurrence.name)
         status = updated.discovery.analysis_status
@@ -367,7 +367,7 @@ def find_high_severity_vulnerabilities_for_image(resource_url, project_id):
     vulnerabilities = grafeas_client.list_occurrences(project_name, filter_str)
     filtered_list = []
     for v in vulnerabilities:
-        if v.severity == Severity.HIGH or v.severity == Severity.CRITICAL:
+        if v.severity in [Severity.HIGH, Severity.CRITICAL]:
             filtered_list.append(v)
     return filtered_list
 # [END containeranalysis_filter_vulnerability_occurrences]
